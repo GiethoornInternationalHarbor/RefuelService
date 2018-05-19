@@ -69,8 +69,11 @@ namespace RefuelService.App.Messaging
         {
             
             Ship refueledShip = JsonSerializer.Deserialize<Ship>(message);
-            //lets say we executed the refueling instantly like a god we have no further stuff here
-            await _refuelService.SendServiceCompletedAsync(refueledShip);
+            //lets say we executed the refueling instantly like a god we have no further stuff here IF it is the right service
+            if (refueledShip.ShipService.Name == "Refuel")
+            {
+                await _refuelService.SendServiceCompletedAsync(refueledShip);
+            }
             return true;
         }  
         #endregion
