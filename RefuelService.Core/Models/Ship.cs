@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RefuelService.Core.Models
 {
-   public class Ship
-    {
+	public class Ship
+	{
+		/// <summary>
+		/// Gets or sets the serial.
+		/// </summary>
+		[Key]
+		public string Serial { get; set; }
 
-        [Key]
-        public string Serial { get; set; }
-        public string Name { get; set; }
-
-        [IgnoreDataMember]
-        public ShipService ShipService { get; set; }
-    }
+		/// <summary>
+		/// Gets or sets the name.
+		/// </summary>
+		public string Name { get; set; }
+	}
 }

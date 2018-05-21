@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace RefuelService.Core.Models
 {
-    /* requested by Kevin */
-    public class ShipService
-    {
-        [Key]
-        public Guid Id { get; set; }
+	public class ShipService
+	{
+		/// <summary>
+		/// Gets or sets the identifier.
+		/// </summary>
+		[Key]
+		public Guid Id { get; set; }
 
-        [Required]
-        public string Name { get; set; }
-
-        public double Price { get; set; }
-    }
+		/// <summary>
+		/// Gets or sets the name.
+		/// </summary>
+		[Required]
+		public string Name { get; set; }
+	}
 }
