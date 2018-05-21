@@ -58,12 +58,10 @@ namespace RefuelService.App.Messaging
 		}
 
 		private async Task<bool> HandleServiceRequested(string message)
-		{
-
-			var receivedShipService = JsonSerializer.Deserialize<ShipService>(message);
-
+		{		
 			// TODO:
-			// Call method to refuel ship, send ServiceCompleted event with ShipService)
+			// Obtain ShipId and ServiceId
+			// Check ship is exist in dock, Call method to refuel ship, send ServiceCompleted event with ShipId and ServiceId)
 
 			return true;
 		}
