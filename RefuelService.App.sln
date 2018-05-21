@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefuelService.App", "RefuelService.App\RefuelService.App.csproj", "{777D79CF-BB2F-43A6-95B7-A483B57052BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefuelService.App", "RefuelService.App\RefuelService.App.csproj", "{777D79CF-BB2F-43A6-95B7-A483B57052BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefuelService.Core", "RefuelService.Core\RefuelService.Core.csproj", "{B4412B4C-048B-42D3-92CE-16ECC4EF4A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefuelService.Core", "RefuelService.Core\RefuelService.Core.csproj", "{B4412B4C-048B-42D3-92CE-16ECC4EF4A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefuelService.Infrastructure", "RefuelService.Infrastructure\RefuelService.Infrastructure.csproj", "{3FC898CB-69A3-4912-8301-3B86D902DCDA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{74596B23-1D71-40AA-8EEE-FC9E00F1C48B}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefuelService.Infrastructure", "RefuelService.Infrastructure\RefuelService.Infrastructure.csproj", "{3FC898CB-69A3-4912-8301-3B86D902DCDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
