@@ -33,27 +33,19 @@ namespace RefuelService.Infrastructure.Services
         {
             return _shipRepository.GetShip(shipId);
         }
-        public Task<Ship> Refuel(Ship ship)
+        public async Task<Ship> Refuel(Ship ship)
         {
-            //return shipservice
-            return Task.Run(async () =>
-            {
-
-                //wait 2sec to spoof refuelling
-                await Task.Delay(2000);
-                //NOTE Do not send events out here, this is just the implementation of the refuelling!
-                return ship;
-            });
+            //wait 2sec to spoof refuelling
+            await Task.Delay(2000);
+            //NOTE Do not send events out here, this is just the implementation of the refuelling!
+            return ship;
         }
 
-        public Task<ServiceRequest> SendServiceCompletedAsync(ServiceRequest serviceRequest)
+        public async Task<ServiceRequest> SendServiceCompletedAsync(ServiceRequest serviceRequest)
         {
-            return Task.Run(async () =>
-            {
-                    // do not change the serviceRequest object, if it enters this function it already has the right ship and service Id's
-                    await _eventPublisher.HandleEventAsync(EventTypes.ServiceCompleted, serviceRequest);
-                return serviceRequest;
-            });
+            // do not change the serviceRequest object, if it enters this function it already has the right ship and service Id's
+            await _eventPublisher.HandleEventAsync(EventTypes.ServiceCompleted, serviceRequest);
+            return serviceRequest;
         }
 
     }
