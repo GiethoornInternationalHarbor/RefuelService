@@ -48,9 +48,6 @@ namespace RefuelService.App.Messaging
             Ship existingShip = await _refuelService.GetShipAsync(receivedShip.Id);
 
             await _refuelService.DeleteShipAsync(existingShip.Id);
-            //TODO? use enum to set ship as undocked so we dont have to delete and recreate it all the time?
-
-            Task.Run(() => _refuelService.SendShipUndockedAsync(existingShip));
             return true;
         }
 
@@ -60,9 +57,6 @@ namespace RefuelService.App.Messaging
             Ship receivedShip = JsonSerializer.Deserialize<Ship>(message);
             //2. Dump ship in db
             Ship createdShip = await _refuelService.CreateShipAsync(receivedShip);
-            //3. Send the docked event out
-            Task.Run(() => _refuelService.SendShipDockedAsync(createdShip));
-            //4. Do i really need to explain the below line?
             return true;
         }
 

@@ -56,24 +56,5 @@ namespace RefuelService.Infrastructure.Services
             });
         }
 
-        public Task<Ship> SendShipDockedAsync(Ship ship)
-        {
-            return Task.Run(async () =>
-            {
-                await _eventPublisher.HandleEventAsync(EventTypes.ShipDocked, ship);
-                return ship;
-            });
-        }
-
-        public Task<Ship> SendShipUndockedAsync(Ship ship)
-        {
-            return Task.Run(async () =>
-            {
-                await _eventPublisher.HandleEventAsync(EventTypes.ShipUndocked, ship);
-                return ship;
-            });
-        }
-
-
     }
 }

@@ -12,16 +12,5 @@ namespace RefuelService.Core.Models
         [Required]
         [Key]
         public Guid Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets the email.
-        /// </summary>
-        [Required]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ship services.
-        /// </summary>
-        public List<ShipService> ShipServices { get; set; }
     }
 }

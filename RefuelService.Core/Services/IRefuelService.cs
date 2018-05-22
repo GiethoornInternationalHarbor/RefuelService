@@ -21,21 +21,6 @@ namespace RefuelService.Core.Services
         Task<Ship> Refuel(Ship ship);
 
         /// <summary>
-        /// Sends the ShipDocked Event
-        /// </summary>
-        /// <param name="ship">The ship that docked.</param>
-        /// <returns></returns>
-        Task<Ship> SendShipDockedAsync(Ship ship);
-
-        /// <summary>
-        /// Sends the ShipUndocked Event
-        /// </summary>
-        /// <param name="ship">The ship that undocked.</param>
-        /// <returns></returns>
-        Task<Ship> SendShipUndockedAsync(Ship ship);
-
-
-        /// <summary>
         /// Sends the ServiceCompleted Event
         /// </summary>
         /// <param name="serviceRequest">The serviceRequest object.</param>
