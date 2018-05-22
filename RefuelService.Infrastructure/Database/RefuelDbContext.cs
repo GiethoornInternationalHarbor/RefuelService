@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Refuel.Infrastructure.Database
+namespace RefuelService.Infrastructure.Database
 {
     public class RefuelDbContext : DbContext
     {

@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Refuel.Infrastructure.Database;
+using RefuelService.Infrastructure.Database;
 using RefuelService.Core;
 using RefuelService.Core.Models;
 using RefuelService.Core.Repositories;
-using RefuelService.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;

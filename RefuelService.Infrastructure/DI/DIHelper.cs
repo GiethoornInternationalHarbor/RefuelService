@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Refuel.Infrastructure.Database;
+using RefuelService.Infrastructure.Database;
 using RefuelService.Core.Messaging;
 using RefuelService.Core.Repositories;
 using RefuelService.Core.Services;

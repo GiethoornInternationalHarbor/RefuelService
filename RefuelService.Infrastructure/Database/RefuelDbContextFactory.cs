@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Refuel.Infrastructure.Database;
+using RefuelService.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
 using System.Text;
