@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Refuel.Infrastructure.Database;
+using RefuelService.Infrastructure.Database;
 using System;
 
 namespace RefuelService.Infrastructure.Migrations
