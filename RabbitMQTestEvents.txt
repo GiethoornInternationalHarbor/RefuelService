@@ -1,0 +1,10 @@
+serviceRequested
+[
+{"serviceid":"ff9f7c8c-92b6-4863-8451-de7c94389d53", "
+shipid":"dd981a39-598d-475f-af0c-b89bcf3a41db"}
+
+]
+
+shipDocked
+
+{ "id":"dd981a39-598d-475f-af0c-b89bcf3a41db", "email":"test@test.com", "shipservices":[]}

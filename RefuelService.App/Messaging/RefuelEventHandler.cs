@@ -6,64 +6,90 @@ using Utf8Json;
 
 namespace RefuelService.App.Messaging
 {
-	public class RefuelEventHandler : IEventHandlerCallback
-	{
-		private readonly IRefuelService _refuelService;
+    public class RefuelEventHandler : IEventHandlerCallback
+    {
+        private readonly IRefuelService _refuelService;
 
-		public RefuelEventHandler(IRefuelService refuelService)
-		{
-			_refuelService = refuelService;
-		}
+        public RefuelEventHandler(IRefuelService refuelService)
+        {
+            _refuelService = refuelService;
+        }
 
-		public async Task<bool> HandleEventAsync(EventTypes eventType, string message)
-		{
-			switch (eventType)
-			{
-				case EventTypes.ShipDocked:
-					{
-						return await HandleShipDocked(message);
-					}
-				case EventTypes.ShipUndocked:
-					{
+        public async Task<bool> HandleEventAsync(EventTypes eventType, string message)
+        {
+            switch (eventType)
+            {
+                case EventTypes.ShipDocked:
+                    {
+                        return await HandleShipDocked(message);
+                    }
+                case EventTypes.ShipUndocked:
+                    {
 
-						return await HandleShipUndocked(message);
-					}
-				case EventTypes.ServiceRequested:
-					{
-						return await HandleServiceRequested(message);
-					}
-				case EventTypes.Unknown:
-					{
-						return true;
-					}
-			}
+                        return await HandleShipUndocked(message);
+                    }
+                case EventTypes.ServiceRequested:
+                    {
+                        return await HandleServiceRequested(message);
+                    }
+                case EventTypes.Unknown:
+                    {
+                        return true;
+                    }
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		private Task<bool> HandleShipUndocked(string message)
-		{
-			// TODO: 
-			// Obtain ship object, Create Ship in database
+        private async Task<bool> HandleShipUndocked(string message)
+        {
 
-			return null; // return true
-		}
+            Ship receivedShip = JsonSerializer.Deserialize<Ship>(message);
+            Ship existingShip = await _refuelService.GetShipAsync(receivedShip.Id);
 
-		private Task<bool> HandleShipDocked(string message)
-		{
-			// TODO: 
-			// Obtain ship object, Remove Ship in database
+            await _refuelService.DeleteShipAsync(existingShip.Id);
+            //TODO? use enum to set ship as undocked so we dont have to delete and recreate it all the time?
 
-			return null; // return true
-		}
+            Task.Run(() => _refuelService.SendShipUndockedAsync(existingShip));
+            return true;
+        }
 
-		private async Task<bool> HandleServiceRequested(string message)
-		{		
-			// TODO:
-			// Obtain ShipId and ServiceId
-			// Check ship is exist in dock, Call method to refuel ship, send ServiceCompleted event with ShipId and ServiceId)
+        private async Task<bool> HandleShipDocked(string message)
+        {
+            //1. Deserialize ship
+            Ship receivedShip = JsonSerializer.Deserialize<Ship>(message);
+            //2. Dump ship in db
+            Ship createdShip = await _refuelService.CreateShipAsync(receivedShip);
+            //3. Send the docked event out
+            Task.Run(() => _refuelService.SendShipDockedAsync(createdShip));
+            //4. Do i really need to explain the below line?
+            return true;
+        }
 
-			return true;
-		}
-	}
+        private async Task<bool> HandleServiceRequested(string message)
+        {
+
+            //musing servicerequest model now
+            var receivedShipService = JsonSerializer.Deserialize<ServiceRequest>(message);
+
+            //check if the service that is requested actually is refuelling.
+            if (receivedShipService.ServiceId == ShipServiceConstants.RefuelId)
+            {
+                Ship existingShip = await _refuelService.GetShipAsync(receivedShipService.ShipId);
+
+                //check if ship is in our DB and thus is docked
+                if (existingShip != null)
+                {
+
+                    await _refuelService.Refuel(existingShip);
+
+                    //call the overload method
+                    Task.Run(() => _refuelService.SendServiceCompletedAsync(receivedShipService));
+
+                }
+            }
+            return true;
+        }
+
+    }
 }
