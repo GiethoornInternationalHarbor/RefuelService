@@ -9,7 +9,9 @@ namespace RefuelService.Core.Models
     {
         [Required]
         public Guid ServiceId { get; set; }
+
         [Required]
+        [Key]
         public Guid ShipId { get; set; }
 
 

@@ -10,9 +10,10 @@ using System;
 namespace RefuelService.Infrastructure.Migrations
 {
     [DbContext(typeof(RefuelDbContext))]
-    partial class RefuelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180523115923_Revision02")]
+    partial class Revision02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,12 +22,10 @@ namespace RefuelService.Infrastructure.Migrations
 
             modelBuilder.Entity("RefuelService.Core.Models.Ship", b =>
                 {
-                    b.Property<Guid>("DBKey")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("Id");
-
-                    b.HasKey("DBKey");
+                    b.HasKey("Id");
 
                     b.ToTable("Ships");
                 });
