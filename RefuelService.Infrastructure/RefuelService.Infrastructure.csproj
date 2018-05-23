@@ -21,8 +21,4 @@
     <ProjectReference Include="..\RefuelService.Core\RefuelService.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

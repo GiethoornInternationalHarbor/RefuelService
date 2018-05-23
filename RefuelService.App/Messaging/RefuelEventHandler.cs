@@ -1,6 +1,7 @@
 ﻿using RefuelService.Core.Messaging;
 using RefuelService.Core.Models;
 using RefuelService.Core.Services;
+using System;
 using System.Threading.Tasks;
 using Utf8Json;
 
@@ -46,7 +47,7 @@ namespace RefuelService.App.Messaging
 
             Ship receivedShip = JsonSerializer.Deserialize<Ship>(message);
             Ship existingShip = await _refuelService.GetShipAsync(receivedShip.Id);
-
+            Console.WriteLine("Ship undocked: " + existingShip.Id);
             await _refuelService.DeleteShipAsync(existingShip.Id);
             return true;
         }
@@ -56,16 +57,16 @@ namespace RefuelService.App.Messaging
             //1. Deserialize ship
             Ship receivedShip = JsonSerializer.Deserialize<Ship>(message);
             //2. Dump ship in db
+            Console.WriteLine("Ship docked: "+receivedShip.Id);
             Ship createdShip = await _refuelService.CreateShipAsync(receivedShip);
             return true;
         }
 
         private async Task<bool> HandleServiceRequested(string message)
         {
-
-            //musing servicerequest model now
-            var receivedShipService = JsonSerializer.Deserialize<ServiceRequest>(message);
-
+             //using servicerequest model now
+            ServiceRequest receivedShipService = JsonSerializer.Deserialize<ServiceRequest>(message);
+            Console.WriteLine("Service requested");
             //check if the service that is requested actually is refuelling.
             if (receivedShipService.ServiceId == ShipServiceConstants.RefuelId)
             {
@@ -74,13 +75,19 @@ namespace RefuelService.App.Messaging
                 //check if ship is in our DB and thus is docked
                 if (existingShip != null)
                 {
-
+                    Console.WriteLine("Refuelling ship: " + existingShip.Id);
+                    //call the refuel method
                     await _refuelService.Refuel(existingShip);
-
-                    //call the overload method
                     Task.Run(() => _refuelService.SendServiceCompletedAsync(receivedShipService));
 
                 }
+                else
+                {
+                    Console.WriteLine("Ship not found");
+                }
+            }
+            else {
+                Console.WriteLine("Our service guid is: "+ShipServiceConstants.RefuelId+" received guid was: "+receivedShipService.ServiceId);
             }
             return true;
         }
