@@ -21,8 +21,8 @@ namespace RefuelService.Infrastructure.DI
             services.AddTransient<IShipRepository, ShipRepository>();
             services.AddTransient<IRefuelService, Services.RefuelService>();
 
-            services.AddSingleton<IEventHandler, RMQMessageHandler>((provider) => new RMQMessageHandler(configuration.GetSection("AMQP").Value));
-            services.AddTransient<IEventPublisher, RMQMessagePublisher>((provider) => new RMQMessagePublisher(configuration.GetSection("AMQP").Value));
+            services.AddSingleton<IEventHandler, RMQMessageHandler>((provider) => new RMQMessageHandler(configuration.GetSection("AMQP_URL").Value));
+            services.AddTransient<IEventPublisher, RMQMessagePublisher>((provider) => new RMQMessagePublisher(configuration.GetSection("AMQP_URL").Value));
 
         }
 
